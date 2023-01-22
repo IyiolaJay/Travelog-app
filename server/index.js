@@ -1,7 +1,9 @@
 import express from "express"
-import cors from "cors"
 import dotenv from "dotenv"
-import morgan from "morgan"
+import cors from "cors"
+
+import userRouter from "./src/routers/user.js"
+
 
 dotenv.config()
 
@@ -9,10 +11,12 @@ const app = express()
 
 const port = process.env.PORT
 
-app.use(morgan("dev"))
-app.use(express.json({ limit: "30mb", extended: true }))
-app.use(express.urlencoded({ limit: "30mb", extended: true }))
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(cors())
+
+//routes
+app.use(userRouter)
 
 
 
