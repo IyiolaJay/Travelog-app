@@ -1,16 +1,18 @@
-import mongoose from "mongoose";
+import dotenv from "dotenv"
+dotenv.config()
 
-const URI = ""
+import mongoose from "mongoose";
+const URI = process.env.MONGO_URI;
 
 const connectDB = async () => {
     try {
-        const connector = await mongoose.connect(URI)
-        console.log(`MongoDB Connected: ${connector.connection.host}`.red.underline)
+        const conn = await mongoose.connect(URI)
+        console.log(`MongoDB Connected: ${conn.connection.host}`)
     } catch (error) {
+        console.log(error)
         process.exit(1)
     }
 }
-module.exports = connectDB
 
+export default connectDB
 
-//mongodb+srv://travelog:<password>@travelogcluster.gz2mq88.mongodb.net/?retryWrites=true&w=majority
