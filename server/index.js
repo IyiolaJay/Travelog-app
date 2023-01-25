@@ -22,6 +22,6 @@ app.use("/travelog", userRoutes)
 
 
 
-app.listen(port || 5000, () => {
+app.listen(port, () => {
     console.log(`app running  live on ${port}`)
 })
