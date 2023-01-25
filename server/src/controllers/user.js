@@ -1,5 +1,4 @@
 import Joi from "joi"
-import bcrypt from "bcryptjs"
 import UserModal from "../models/user.js"
 import {
     generateTokenFromPayload,
