@@ -19,9 +19,6 @@ app.use(cors())
 //routes
 app.use("/travelog", userRoutes)
 
-
-
-
 app.listen(port, () => {
     console.log(`app running  live on ${port}`)
 })

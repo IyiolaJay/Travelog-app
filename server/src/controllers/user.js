@@ -1,6 +1,5 @@
-import Joi from "joi";
-import bcrypt from "bcryptjs";
-import UserModal from "../models/user.js";
+import Joi from "joi"
+import UserModal from "../models/user.js"
 import {
   generateTokenFromPayload,
   passwordToHash,
@@ -77,7 +76,7 @@ export const loginUser = async (req, res) => {
     //validate password
     const ispasswordCorrect = compareBcryptPassword(password, user.password);
     if (!ispasswordCorrect) {
-      return res.status(400).json({ message: "Invalid Credencials" });
+      return res.status(400).json({ message: "Invalid Credentials" });
     }
 
     res.status(200).json({
