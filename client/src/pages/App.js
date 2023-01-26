@@ -1,8 +1,8 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Onboarding from "./components/ui/Onboarding";
-import Signin from "./components/ui/auth/Signin";
-import "./App.css";
+import "../styles/App.css";
+import Onboarding from "./onboarding/Onboarding";
+import SigninPage from "./signin/Signin";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -12,7 +12,7 @@ const App = () => {
     },
     {
       path: "/signin",
-      element: <Signin />,
+      element: <SigninPage />,
     },
   ]);
   return (

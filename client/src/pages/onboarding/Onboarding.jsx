@@ -1,12 +1,12 @@
 import React from "react";
 import Balancer from "react-wrap-balancer";
-import ONBOARDING_IMG from "../assests/img/travelling.png";
+import ONBOARDING_IMG from "../../assests/img/travelling.png";
 import { useNavigate } from "react-router-dom";
 
 const Onboarding = () => {
   const navigate = useNavigate();
   return (
-    <section className="container h-screen">
+    <div className="container h-screen">
       <div className="h-full">
         <div className="grid h-[55%] place-items-center">
           <img
@@ -42,7 +42,7 @@ const Onboarding = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
