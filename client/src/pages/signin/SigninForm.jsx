@@ -20,7 +20,7 @@ const SigninForm = () => {
               type="email"
               id="email"
               name="email"
-              className="border-black-[#00000080] h-[48px] rounded border-2  px-4 outline-none"
+              className="border-1 h-[48px] rounded border border-[#d1d1d1]  px-4 outline-none"
             />
           </div>
           <div className="mb-3 flex w-full flex-col">
@@ -31,7 +31,7 @@ const SigninForm = () => {
               type="password"
               id="password"
               name="password"
-              className="border-black-[#00000080] h-[48px] rounded border-2 px-4 outline-none"
+              className="border-1 h-[48px] rounded border border-[#d1d1d1] px-4 outline-none"
             />
           </div>
 

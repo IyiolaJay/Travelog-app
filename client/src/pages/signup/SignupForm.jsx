@@ -6,7 +6,7 @@ const SignupForm = () => {
     <div className="container grid h-screen place-items-center">
       <div className="w-full">
         <div className="mb-10">
-          <h1 className="mb-2 text-3xl">Sign Up</h1>
+          <h1 className="mb-3 text-3xl">Sign Up</h1>
           <p className="text-sm text-[#252525B2]">
             create an account with your{" "}
             <span className="text-base-color">email</span> and{" "}
@@ -14,7 +14,7 @@ const SignupForm = () => {
           </p>
         </div>
         <form autoComplete="off" className="w-full">
-          <div className="mb-2 flex w-full flex-col">
+          <div className="mb-3 flex w-full flex-col">
             <label htmlFor="username" className="mb-1">
               Username
             </label>
@@ -22,10 +22,10 @@ const SignupForm = () => {
               type="email"
               id="username"
               name="username"
-              className="border-black-[#00000080] h-[48px] rounded border-2  px-4 outline-none"
+              className="border-1 h-[48px] rounded border border-[#d1d1d1]  px-4 outline-none"
             />
           </div>
-          <div className="mb-2 flex w-full flex-col">
+          <div className="mb-3 flex w-full flex-col">
             <label htmlFor="email" className="mb-1">
               Email
             </label>
@@ -33,10 +33,10 @@ const SignupForm = () => {
               type="email"
               id="email"
               name="email"
-              className="border-black-[#00000080] h-[48px] rounded border-2  px-4 outline-none"
+              className="border-1 h-[48px] rounded border border-[#d1d1d1]  px-4 outline-none"
             />
           </div>
-          <div className="mb-2 flex w-full flex-col">
+          <div className="mb-3 flex w-full flex-col">
             <label htmlFor="password" className="mb-1">
               Password
             </label>
@@ -44,7 +44,7 @@ const SignupForm = () => {
               type="password"
               id="password"
               name="password"
-              className="border-black-[#00000080] h-[48px] rounded border-2 px-4 outline-none"
+              className="border-1 h-[48px] rounded border border-[#d1d1d1] px-4 outline-none"
             />
           </div>
           <div className="mb-8 flex w-full flex-col">
@@ -55,7 +55,7 @@ const SignupForm = () => {
               type="confirm_password"
               id="confirm_password"
               name="confirm_password"
-              className="border-black-[#00000080] h-[48px] rounded border-2 px-4 outline-none"
+              className="border-1 h-[48px] rounded border border-[#d1d1d1] px-4 outline-none"
             />
           </div>
           <button className="mb-4 w-full rounded bg-pry-color p-[10px] text-center text-white">
