@@ -1,7 +1,7 @@
 import React from "react";
 import SigninForm from "./SigninForm";
 
-const SigninPage = () => {
+const Signin = () => {
   return (
     <section>
       <SigninForm />
@@ -9,4 +9,4 @@ const SigninPage = () => {
   );
 };
 
-export default SigninPage;
+export default Signin;
