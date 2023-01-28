@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SigninForm = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <div className="container grid h-screen place-items-center">
       <div className="w-full">
@@ -11,7 +17,7 @@ const SigninForm = () => {
             Sign in into your account with email and password
           </p>
         </div>
-        <form autoComplete="off" className="w-full">
+        <form autoComplete="off" className="w-full" onSubmit={handleSubmit}>
           <div className="mb-5 flex w-full flex-col">
             <label htmlFor="email" className="mb-1">
               Email
@@ -20,7 +26,8 @@ const SigninForm = () => {
               type="email"
               id="email"
               name="email"
-              className="border-1 h-[48px] rounded border border-[#d1d1d1]  px-4 outline-none"
+              className="border-1 h-[45px] rounded border border-[#d1d1d1]  px-4 outline-none"
+              placeholder="johndoe@email.com"
             />
           </div>
           <div className="mb-3 flex w-full flex-col">
@@ -31,7 +38,8 @@ const SigninForm = () => {
               type="password"
               id="password"
               name="password"
-              className="border-1 h-[48px] rounded border border-[#d1d1d1] px-4 outline-none"
+              className="border-1 h-[45px] rounded border border-[#d1d1d1] px-4 outline-none"
+              placeholder="Enter password"
             />
           </div>
 
@@ -52,7 +60,10 @@ const SigninForm = () => {
             </Link>
           </div>
 
-          <button className="mb-4 w-full rounded bg-pry-color p-[10px] text-center text-white">
+          <button
+            className="mb-4 w-full rounded bg-pry-color p-[10px] text-center text-white"
+            onClick={() => navigate("/signup")}
+          >
             Get Started
           </button>
           <p className="text-sm">

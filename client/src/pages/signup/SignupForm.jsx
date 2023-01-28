@@ -1,7 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignupForm = () => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <div className="container grid h-screen place-items-center">
       <div className="w-full">
@@ -13,7 +18,7 @@ const SignupForm = () => {
             <span className="text-base-color">password</span>
           </p>
         </div>
-        <form autoComplete="off" className="w-full">
+        <form autoComplete="off" className="w-full" onSubmit={handleSubmit}>
           <div className="mb-3 flex w-full flex-col">
             <label htmlFor="username" className="mb-1">
               Username
@@ -22,7 +27,8 @@ const SignupForm = () => {
               type="email"
               id="username"
               name="username"
-              className="border-1 h-[48px] rounded border border-[#d1d1d1]  px-4 outline-none"
+              className="border-1 h-[45px] rounded border border-[#d1d1d1]  px-4 outline-none"
+              placeholder="John Doe"
             />
           </div>
           <div className="mb-3 flex w-full flex-col">
@@ -33,7 +39,8 @@ const SignupForm = () => {
               type="email"
               id="email"
               name="email"
-              className="border-1 h-[48px] rounded border border-[#d1d1d1]  px-4 outline-none"
+              className="border-1 h-[45px] rounded border border-[#d1d1d1]  px-4 outline-none"
+              placeholder="johndoe@email.com"
             />
           </div>
           <div className="mb-3 flex w-full flex-col">
@@ -44,7 +51,8 @@ const SignupForm = () => {
               type="password"
               id="password"
               name="password"
-              className="border-1 h-[48px] rounded border border-[#d1d1d1] px-4 outline-none"
+              className="border-1 h-[45px] rounded border border-[#d1d1d1] px-4 outline-none"
+              placeholder="Enter password"
             />
           </div>
           <div className="mb-8 flex w-full flex-col">
@@ -55,10 +63,14 @@ const SignupForm = () => {
               type="confirm_password"
               id="confirm_password"
               name="confirm_password"
-              className="border-1 h-[48px] rounded border border-[#d1d1d1] px-4 outline-none"
+              className="border-1 h-[45px] rounded border border-[#d1d1d1] px-4 outline-none"
+              placeholder="Confirm password"
             />
           </div>
-          <button className="mb-4 w-full rounded bg-pry-color p-[10px] text-center text-white">
+          <button
+            className="mb-4 w-full rounded bg-pry-color p-[10px] text-center text-white"
+            onClick={() => navigate("/verify")}
+          >
             Get Started
           </button>
           <p className="text-center text-sm">

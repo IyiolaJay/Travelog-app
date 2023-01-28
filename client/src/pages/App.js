@@ -4,6 +4,8 @@ import "../styles/App.css";
 import Onboarding from "./onboarding/Onboarding";
 import Signin from "./signin/Signin";
 import Signup from "./signup/Signup";
+import Verify from "./verify/Verify";
+import Verified from "./verifiy-success/Verified";
 
 const App = () => {
   const router = createBrowserRouter([
@@ -18,6 +20,14 @@ const App = () => {
     {
       path: "/signup",
       element: <Signup />,
+    },
+    {
+      path: "/verify",
+      element: <Verify />,
+    },
+    {
+      path: "/verified",
+      element: <Verified />,
     },
   ]);
   return (
