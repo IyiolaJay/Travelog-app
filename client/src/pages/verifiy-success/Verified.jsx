@@ -5,7 +5,7 @@ const Verified = () => {
   return (
     <div className="container grid h-screen place-items-center">
       <div className="w-full">
-        <div className="mb-[170px] text-center">
+        <div className="mb-[140px] text-center">
           <img src={check} alt="successful" className="mx-auto mb-4 w-[50px]" />
           <p className="text-xl">
             You have been <span className="text-base-color">verified</span>{" "}

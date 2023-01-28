@@ -24,7 +24,7 @@ const VerifyForm = () => {
   return (
     <div className="container grid h-screen place-items-center">
       <div className="w-full">
-        <div className="mb-10">
+        <div className="mb-20">
           <h1 className="mb-3 text-3xl">Verification</h1>
           <p className="text-sm text-[#252525B2]">
             Enter the verification code you have received in your{" "}
