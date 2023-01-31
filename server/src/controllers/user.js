@@ -6,6 +6,7 @@ import {
   compareBcryptPassword,
 } from "../helper.js";
 import user from "../models/user.js";
+import userOTPVerification from "../models/userOTPVerification.js";
 
 // signup route -  public route
 export const createUser = async (req, res) => {
@@ -39,7 +40,10 @@ export const createUser = async (req, res) => {
       username,
       email,
       password: hashedPassword,
+      verified: false
     });
+
+    //email verification
 
     res.status(201).json({
       _id: user.id,
