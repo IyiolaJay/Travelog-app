@@ -17,8 +17,8 @@ const sendMail = async (params) => {
         const info = await transporter.sendMail({
             from: process.env.EMAIL_USERNAME,
             to: params.to,
-            subject: "Email Verification",
-            html: `<p>Please enter the code <b>${params.OTP}</b> to complete your Sign Up</p>`
+            subject: params.subject,
+            html: `<p>Please enter the code or link <b>${params.code || ""}</b> to complete your ${params.message}</p>`
         })
 
         return info

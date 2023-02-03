@@ -7,6 +7,10 @@ import {
 } from "../utils/helper.utils.js";
 import generateOTP from "../services/OTPService.js";
 import sendMail from "../services/emailService.js";
+import {
+  requestPasswordReset,
+  resetPassword
+} from "../services/authService.js";
 
 
 // @signUp route   
@@ -51,7 +55,9 @@ export const createUser = async (req, res) => {
     //send OTP to user
     await sendMail({
       to: email,
-      OTP: otpGenerated
+      subject: "Email Verification",
+      code: otpGenerated,
+      message: "your SignUp"
     })
 
     return res.status(201).json({
@@ -70,12 +76,11 @@ export const createUser = async (req, res) => {
 export const verifyEmail = async (req, res) => {
   const { email, otp } = req.body
   const user = await validateUserSignUp(email, otp)
-  console.log(user)
   return res.status(200).json({
     _id: user[1]._id,
     username: user[1].username,
     email: user[1].email,
-    verified: user[1].verified,
+    verified: true,
   })
 
 }
@@ -137,3 +142,21 @@ export const loginUser = async (req, res) => {
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
+
+
+// request reset password route
+export const resetpasswordRequest = async (req, res) => {
+  const requestPasswordResetService = await requestPasswordReset(req.body.email)
+  return res.json(requestPasswordResetService)
+}
+
+//reset password route
+export const resetPasswordController = async (req, res) => {
+  const resetPasswordService = await resetPassword(
+    req.body.userId,
+    req.body.token,
+    req.body.password
+  )
+
+  return res.json(resetPasswordService)
+}
