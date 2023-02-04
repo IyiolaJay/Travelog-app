@@ -55,7 +55,6 @@ export const resetPassword = async (userId, token, password) => {
     if (!passwordResetToken) {
         throw new Error("Invalid or expired password reset token")
     }
-    console.log(passwordResetToken.token, token)
 
     const isValid = compareBcryptPassword(token, passwordResetToken.token)
 
