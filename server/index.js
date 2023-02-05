@@ -2,7 +2,7 @@ import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
 import connectDB from "./src/config/db.js"
-import userRoutes from "./src/routes/user.js"
+import userRoutes from "./src/routes/userRoute.js"
 
 const app = express()
 dotenv.config()
@@ -22,3 +22,4 @@ app.use("/travelog", userRoutes)
 app.listen(port, () => {
     console.log(`app running  live on ${port}`)
 })
+
