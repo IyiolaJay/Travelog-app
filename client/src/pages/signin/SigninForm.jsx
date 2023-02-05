@@ -64,7 +64,7 @@ const SigninForm = () => {
             className="mb-4 w-full rounded bg-pry-color p-[10px] text-center text-white"
             onClick={() => navigate("/signup")}
           >
-            Get Started
+            Sign In
           </button>
           <p className="text-sm">
             By clicking ‘sign in’ you agree to our{" "}

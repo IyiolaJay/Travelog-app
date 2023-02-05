@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Balancer from "react-wrap-balancer";
 import ONBOARDING_IMG from "../../assests/img/travelling.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoadingScreen from "../../components/ui/LoadingScreen";
 
 const Onboarding = () => {
@@ -11,7 +11,7 @@ const Onboarding = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 5000);
+    }, 3000);
   }, []);
   const navigate = useNavigate();
   return (
@@ -43,14 +43,16 @@ const Onboarding = () => {
               </p>
               <button
                 className="mb-3 w-full rounded bg-pry-color p-[10px] text-center text-white"
-                onClick={() => navigate("/signin")}
+                onClick={() => navigate("/signup")}
               >
                 Get Started
               </button>
               <div className="text-center text-sm">
                 <p>
                   Already have an account?{" "}
-                  <span className="text-base-color">sign in</span>
+                  <Link to="/signin" className="text-base-color">
+                    sign in
+                  </Link>
                 </p>
               </div>
             </div>

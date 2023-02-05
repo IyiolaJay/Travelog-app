@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const VerifyForm = () => {
   const navigate = useNavigate();
 
-  const [otp, setOtp] = useState(new Array(4).fill(""));
+  const [otp, setOtp] = useState(new Array(6).fill(""));
 
   const handleChange = (element, index) => {
     //check if input is a number

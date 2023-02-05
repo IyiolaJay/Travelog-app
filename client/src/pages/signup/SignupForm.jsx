@@ -71,7 +71,7 @@ const SignupForm = () => {
             className="mb-4 w-full rounded bg-pry-color p-[10px] text-center text-white"
             onClick={() => navigate("/verify")}
           >
-            Get Started
+            Sign Up
           </button>
           <p className="text-center text-sm">
             Do you already have an account?{" "}
