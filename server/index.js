@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cors())
 
 //routes
-app.use("/travelog", userRoutes)
+app.use("/travelog/users", userRoutes)
 
 app.listen(port, () => {
     console.log(`app running  live on ${port}`)

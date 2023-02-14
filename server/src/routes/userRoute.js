@@ -5,6 +5,9 @@ import {
     loginUser,
     resetpasswordRequest,
     resetPasswordController,
+    getUser,
+    updatedUser,
+    deleteUser
 
 } from "../controllers/userController.js"
 
@@ -15,6 +18,7 @@ router.post("/signin", loginUser)
 router.post("/verify", verifyEmail)
 router.post("/password-reset-request", resetpasswordRequest)
 router.post("/password-reset", resetPasswordController)
+router.get("/get/me")
 
 
 export default router

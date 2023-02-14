@@ -11,6 +11,8 @@ import {
   requestPasswordReset,
   resetPassword
 } from "../services/authService.js";
+import auth from "../middlewares/auth.js"
+
 
 
 // @signUp route   
@@ -159,4 +161,24 @@ export const resetPasswordController = async (req, res) => {
   )
 
   return res.json(resetPasswordService)
+}
+
+
+//@get user controller
+//private route
+export const getUser = async (req, auth, res) => {
+
+}
+
+// @update user controller
+// @private route
+
+export const updatedUser = async (req, auth, res) => {
+
+}
+
+//@delete user controller
+//@private route
+export const deleteUser = async (req, auth, res) => {
+
 }

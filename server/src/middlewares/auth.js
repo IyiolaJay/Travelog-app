@@ -1,11 +1,7 @@
-import jwt from "jsonwebtoken"
-import Usermodal from "../models/user.js"
+import Usermodal from "../models/userModel.js"
 import {
     generatePayloadFromToken,
-} from "../helper"
-
-import dotenv from "dotenv"
-dotenv.config()
+} from "../utils/helper.utils.js"
 
 const auth = async (req, res, next) => {
     let token
