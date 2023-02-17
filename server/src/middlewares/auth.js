@@ -11,11 +11,11 @@ const auth = async (req, res, next) => {
     ) {
         try {
             //get token from header
-            token = req.headers.authorization.split(" ")[1]
+            token = req.headers.authorization.split(' ')[1]
             //verify token
             const decoded = generatePayloadFromToken(token)
             // get user from token 
-            req.user = await Usermodal.findById(decoded._id).select("-password")
+            req.user = await Usermodal.findById(decoded.payload).select("-password").select("-otp")
             next()
 
         } catch (error) {

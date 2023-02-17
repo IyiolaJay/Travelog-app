@@ -8,9 +8,9 @@ export const generateTokenFromPayload = (payload) => {
 }
 
 export const generatePayloadFromToken = (token) => {
-    const salt = process.env.JWT_sECRET
+    const salt = process.env.JWT_SECRET
     const payload = jwt.verify(token, salt)
-    return payload
+    return payload;
 }
 
 export const passwordToHash = (password) => {

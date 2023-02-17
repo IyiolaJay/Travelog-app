@@ -1,11 +1,12 @@
 import express from "express";
+import auth from "../middlewares/auth.js"
 import {
     createUser,
     verifyEmail,
     loginUser,
     resetpasswordRequest,
     resetPasswordController,
-    getUser,
+    getMe,
     updatedUser,
     deleteUser
 
@@ -18,7 +19,9 @@ router.post("/signin", loginUser)
 router.post("/verify", verifyEmail)
 router.post("/password-reset-request", resetpasswordRequest)
 router.post("/password-reset", resetPasswordController)
-router.get("/get/me")
+router.get("/me", auth, getMe)
+router.patch("/me", auth, updatedUser)
+router.delete("/me", auth, deleteUser)
 
 
 export default router
