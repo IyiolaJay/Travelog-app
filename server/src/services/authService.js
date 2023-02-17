@@ -10,8 +10,6 @@ import {
 import dotevn from "dotenv";
 dotevn.config()
 
-const clientURL = process.env.BASE_URL
-
 //request password reset
 export const requestPasswordReset = async (email) => {
     //check for user
@@ -35,7 +33,7 @@ export const requestPasswordReset = async (email) => {
     }).save()
 
     //create link
-    const link = `${clientURL}/password-reset?token=${resetToken}&id=${user._id}`;
+    const link = `${process.env.BASE_URL}/password-reset?token=${resetToken}&id=${user._id}`;
     // send the mail
     sendMail({
         to: user.email,
