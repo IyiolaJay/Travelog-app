@@ -15,7 +15,7 @@ export const requestPasswordReset = async (email) => {
     //check for user
     const user = await userModal.findOne({ email })
     //check if user exist
-    if (!user) throw new Error("Email does not exist")
+    if (!user) return { message: "Email does not exist!" }
     //check for token
     const token = await TokenModal.findOne({ userId: user._id })
     //if token delete it
@@ -28,8 +28,8 @@ export const requestPasswordReset = async (email) => {
     await new TokenModal({
         userId: user._id,
         token: hashedToken,
-        createdAt: Date.now()
-
+        createdAt: Date.now(),
+        expireAt: new Date()
     }).save()
 
     //create link
@@ -38,9 +38,7 @@ export const requestPasswordReset = async (email) => {
     sendMail({
         to: user.email,
         subject: "Password Reset",
-        code: link,
-        message: "Password Reset"
-
+        html: `<p>Please click the link <b>${link}</b> to complete your Password Reset</p>`
     })
 
     return link
@@ -51,13 +49,13 @@ export const resetPassword = async (userId, token, password) => {
     //get user from token
     const passwordResetToken = await TokenModal.findOne({ userId })
     if (!passwordResetToken) {
-        throw new Error("Invalid or expired password reset token")
+        return { message: "Invalid or expired password reset token" }
     }
 
     const isValid = compareBcryptPassword(token, passwordResetToken.token)
 
     if (!isValid) {
-        throw new Error("Invalid or expired password reset token")
+        return { message: "Invalid or expired password reset token" }
     }
     // hash new password 
     const hashedPassword = passwordToHash(password)
@@ -75,7 +73,7 @@ export const resetPassword = async (userId, token, password) => {
     sendMail({
         to: user.email,
         subject: "Password Reset Successful",
-        message: "Password Reset"
+        html: `<p>Your Password reset was successful</p>`
     })
 
     await passwordResetToken.deleteOne()

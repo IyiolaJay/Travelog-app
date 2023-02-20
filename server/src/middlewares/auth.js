@@ -15,7 +15,7 @@ const auth = async (req, res, next) => {
             //verify token
             const decoded = generatePayloadFromToken(token)
             // get user from token 
-            req.user = await Usermodal.findById(decoded.payload).select("-password").select("-otp")
+            req.user = await Usermodal.findById(decoded.payload).select("-password")
             next()
 
         } catch (error) {

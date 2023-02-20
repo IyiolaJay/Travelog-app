@@ -1,5 +1,6 @@
 import Joi from "joi";
 import UserModal from "../models/userModel.js";
+import OtpModel from "../models/otpModel.js";
 import {
   generateTokenFromPayload,
   passwordToHash,
@@ -18,15 +19,17 @@ import {
 //@access: public
 export const createUser = async (req, res) => {
   // user input
-  const { username, email, password } = req.body;
+  const { username, firstname, lastname, email, password } = req.body;
   //parameter validation
   const schema = Joi.object().keys({
     username: Joi.string().required(),
+    firstname: Joi.string().required(),
+    lastname: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
   });
   // validate user input
-  const { error } = schema.validate({ username, email, password });
+  const { error } = schema.validate({ username, firstname, lastname, email, password });
   if (error) {
     return res
       .status(400)
@@ -44,31 +47,43 @@ export const createUser = async (req, res) => {
     const hashedPassword = passwordToHash(password);
     const otpGenerated = generateOTP()
     const hashedOTP = passwordToHash(otpGenerated)
-    //create user
+
+    // create user
     const user = await UserModal.create({
       username,
+      firstname,
+      lastname,
       email,
       password: hashedPassword,
-      otp: hashedOTP,
       verified: false
     });
+
+    // create otp
+    await new OtpModel({
+      userId: user._id,
+      otp: hashedOTP,
+      createdAt: Date.now(),
+      expireAt: new Date()
+    }).save()
 
     //send OTP to user
     await sendMail({
       to: email,
       subject: "Email Verification",
-      code: otpGenerated,
-      message: "your SignUp"
+      html: `<p>Please enter the code <b>${otpGenerated}</b> to complete your SignUp</p>`
     })
 
     return res.status(201).json({
       _id: user.id,
       username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
       email: user.email,
+      verified: user.verified,
       token: generateTokenFromPayload(user.id),
     });
   } catch (error) {
-    return res.status(501).json({ message: "Something went wrong" });
+    return res.status(501).json({ message: "Something went wrong!" });
   }
 };
 
@@ -103,11 +118,12 @@ export const loginUser = async (req, res) => {
     res.status(200).json({
       _id: user._id,
       username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
       email,
       token: generateTokenFromPayload(user._id),
     });
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
@@ -118,28 +134,31 @@ export const loginUser = async (req, res) => {
 export const verifyEmail = async (req, res) => {
   const { email, otp } = req.body
   const user = await validateUserSignUp(email, otp)
-  return res.status(200).json({
-    _id: user[1]._id,
-    username: user[1].username,
-    email: user[1].email,
-    verified: true,
-  })
+  return res.status(200).json(user[1])
 
 }
 // validate user signup  
 const validateUserSignUp = async (email, otp) => {
   const user = await UserModal.findOne({ email })
+  const userOtp = await OtpModel.findOne({ userId: user._id })
   if (!user) {
-    return [false, "User not found"]
+    return [false, {
+      message: "User not found"
+    }]
   }
-  const check = compareBcryptPassword(otp, user.otp)
-  if (user && !check) {
-    return [false, 'Invalid OTP']
+  const validOTP = compareBcryptPassword(otp, userOtp.otp)
+  if (user && !validOTP) {
+    return [false, {
+      message: "Invalid OTP!"
+    }]
   }
   //update the user
-  const updatedUser = await UserModal.findByIdAndUpdate(user._id, {
+  await UserModal.findByIdAndUpdate(user._id, {
     verified: true
   })
+
+  // get the updated user 
+  const updatedUser = await UserModal.findById(user.id).select("-password")
 
   return [true, updatedUser]
 };
@@ -181,7 +200,7 @@ export const getMe = async (req, res) => {
 export const updatedUser = async (req, res) => {
   //validate the update input
   const updates = Object.keys(req.body)
-  const allowedUpdates = ["username", "email", "password"]
+  const allowedUpdates = ["username", "firstname", "lastname", "email", "password"]
   const isValidOperation = updates.every(update => allowedUpdates.includes(update))
   if (!isValidOperation) {
     return res.status(400).json({ message: "Invalid Updates" })
@@ -194,6 +213,8 @@ export const updatedUser = async (req, res) => {
     return res.status(201).json({
       _id: user.id,
       username: user.username,
+      firstname: user.firstname,
+      lastname: user.lastname,
       email: user.email
     })
   } catch (error) {

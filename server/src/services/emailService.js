@@ -18,7 +18,7 @@ const sendMail = async (params) => {
             from: process.env.EMAIL_USERNAME,
             to: params.to,
             subject: params.subject,
-            html: `<p>Please enter the code or link <b>${params.code || ""}</b> to complete your ${params.message}</p>`
+            html: params.html
         })
 
         return info
